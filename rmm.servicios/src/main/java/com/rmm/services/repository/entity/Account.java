@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "accounts")
@@ -16,20 +17,20 @@ public class Account {
     @Id
     @Column(name = "account_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long accountId;
+     private Long accountId;
 
     @Column(name = "account_name")
-    String accountName;
+    private String accountName;
 
     @OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
     Customer customer;
 
-    //List<Device> listDevices;
+    @OneToMany(mappedBy = "account")
+    List<Device> listDevices;
 
     /**
      * This field is used for logic delete
      */
-    @Column
     Boolean state;
 
     /*

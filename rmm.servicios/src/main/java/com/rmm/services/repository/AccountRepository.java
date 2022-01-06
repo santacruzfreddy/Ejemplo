@@ -1,7 +1,7 @@
-package com.rmm.services.persistence;
+package com.rmm.services.repository;
 
-import com.rmm.services.persistence.crud.AccountCrudRepository;
-import com.rmm.services.persistence.entity.Account;
+import com.rmm.services.repository.crud.AccountCrudRepository;
+import com.rmm.services.repository.entity.Account;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

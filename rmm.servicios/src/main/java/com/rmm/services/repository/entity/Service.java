@@ -1,4 +1,4 @@
-package com.rmm.services.persistence.entity;
+package com.rmm.services.repository.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,22 +9,21 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "accounts")
+@Table(name = "services")
 @Getter
 @Setter
-public class Account {
+public class Service {
 
     @Id
-    @Column(name = "account_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long accountId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "service_id")
+    Long serviceId;
 
-    @Column(name = "account_name")
-    String accountName;
+    @Column(name = "service_Name")
+    String serviceName;
 
     /**
      * This field is used for logic delete
@@ -32,11 +31,17 @@ public class Account {
     Boolean state;
 
     /*
-    auditory fields
-    */
+        auditory fields
+        * */
     @Column(name = "creation_date")
     LocalDateTime creationDate;
 
+    @Column(name = "creation_user")
+    String creationUser;
+
     @Column(name = "update_date")
     LocalDateTime updateDate;
+
+    @Column(name = "update_user")
+    String updateUser;
 }

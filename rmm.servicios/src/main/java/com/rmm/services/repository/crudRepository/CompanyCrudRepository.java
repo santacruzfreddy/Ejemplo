@@ -1,6 +1,6 @@
-package com.rmm.services.repository.crud;
+package com.rmm.services.repository.crudRepository;
 
-import com.rmm.services.repository.entity.Company;
+import com.rmm.services.entity.Company;
 import org.springframework.data.repository.CrudRepository;
 
 public interface CompanyCrudRepository extends CrudRepository<Company, Long> {

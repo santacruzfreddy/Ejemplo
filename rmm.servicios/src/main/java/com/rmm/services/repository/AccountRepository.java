@@ -1,7 +1,7 @@
 package com.rmm.services.repository;
 
-import com.rmm.services.repository.crud.AccountCrudRepository;
-import com.rmm.services.repository.entity.Account;
+import com.rmm.services.repository.crudRepository.AccountCrudRepository;
+import com.rmm.services.entity.Account;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

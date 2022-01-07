@@ -1,7 +1,7 @@
 package com.rmm.services.repository;
 
-import com.rmm.services.repository.crud.CompanyCrudRepository;
-import com.rmm.services.repository.entity.Company;
+import com.rmm.services.repository.crudRepository.CompanyCrudRepository;
+import com.rmm.services.entity.Company;
 import org.springframework.stereotype.Repository;
 
 @Repository

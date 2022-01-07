@@ -1,8 +1,5 @@
 package com.rmm.services.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 
 @Entity
@@ -18,7 +15,7 @@ public class AccountsService {
 
     @ManyToOne
     @JoinColumn(name = "service_id", insertable = false, updatable = false)
-    Service service;
+    ServiceEntity service;
 
     public AccountsServicePK getAccountServiceId() {
         return accountServiceId;
@@ -36,11 +33,11 @@ public class AccountsService {
         this.account = account;
     }
 
-    public Service getService() {
+    public ServiceEntity getService() {
         return service;
     }
 
-    public void setService(Service service) {
+    public void setService(ServiceEntity service) {
         this.service = service;
     }
 }

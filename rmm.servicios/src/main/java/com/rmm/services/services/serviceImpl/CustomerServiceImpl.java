@@ -3,7 +3,7 @@ package com.rmm.services.services.serviceImpl;
 import com.rmm.services.entity.Account;
 import com.rmm.services.entity.Customer;
 import com.rmm.services.repository.CustomerRepository;
-import com.rmm.services.services.service.CustomerService;
+import com.rmm.services.services.service.CustomerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class CustomerServiceImpl implements CustomerService {
+public class CustomerServiceImpl implements CustomerServices {
 
     @Autowired
     CustomerRepository customerRepository;

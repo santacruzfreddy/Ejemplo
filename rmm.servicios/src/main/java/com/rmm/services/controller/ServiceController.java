@@ -1,17 +1,33 @@
 package com.rmm.services.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.rmm.services.entity.ServiceEntity;
+import com.rmm.services.services.service.ServiceServices;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/service")
 public class ServiceController
 {
-    @GetMapping("/getService/{serviceId}")
-    public String getService(@PathVariable("serviceId") Long serviceId)
+    @Autowired
+    private ServiceServices serviceServices;
+
+    @PostMapping("/create")
+    public ServiceEntity createService(@RequestBody ServiceEntity service)
     {
-        return "Get Service successful.";
+        return serviceServices.createService(service);
     }
+
+    @PostMapping("/update")
+    public ServiceEntity updateService(@RequestBody ServiceEntity service)
+    {
+        return serviceServices.updateService(service);
+    }
+
+    @GetMapping("/get/{serviceId}")
+    public ServiceEntity getService(@PathVariable("serviceId") Long serviceId)
+    {
+        return serviceServices.getService(serviceId);
+    }
+
 }

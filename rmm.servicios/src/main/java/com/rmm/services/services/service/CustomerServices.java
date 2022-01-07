@@ -5,7 +5,7 @@ import com.rmm.services.entity.Customer;
 
 import java.util.List;
 
-public interface CustomerService {
+public interface CustomerServices {
 
     public Customer createCustomer(Customer customer);
 

@@ -1,7 +1,7 @@
 package com.rmm.services.controller;
 
 import com.rmm.services.entity.Customer;
-import com.rmm.services.services.service.CustomerService;
+import com.rmm.services.services.service.CustomerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
     @Autowired
-    CustomerService customerService;
+    CustomerServices customerService;
 
     @PostMapping("/create")
     public Customer createCustomer(@RequestBody Customer customer) {

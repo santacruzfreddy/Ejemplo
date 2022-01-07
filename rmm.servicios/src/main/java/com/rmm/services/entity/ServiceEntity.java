@@ -1,8 +1,5 @@
 package com.rmm.services.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
@@ -13,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "services")
-public class Service {
+public class ServiceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

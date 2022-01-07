@@ -1,5 +1,6 @@
 package com.rmm.services.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,6 +35,7 @@ public class Customer {
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
+    @JsonIgnore
     Account account;
 
     /*

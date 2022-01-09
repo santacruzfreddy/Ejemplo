@@ -12,7 +12,10 @@ In this project we need create a Spring Boot Project, with microservices archite
 Spring FrameWork
 Spring Boot
 Spring Data JPA
-Lombok
 Spring Web
+Spring Security
 
 Postgresql  
+
+
+https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/diagramRmm.png

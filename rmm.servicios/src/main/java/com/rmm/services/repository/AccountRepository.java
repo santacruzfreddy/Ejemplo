@@ -12,6 +12,10 @@ public class AccountRepository {
     @Autowired
     private AccountCrudRepository accountCrudRepository;
 
+    private static void run() {
+
+    }
+
     public Account createAccount(Account account)
     {
         return accountCrudRepository.save(account);
@@ -22,7 +26,8 @@ public class AccountRepository {
         return accountCrudRepository.save(account);
     }
 
-    public Optional<Account> getAccountById(Long accountId){
-        return this.accountCrudRepository.findById(accountId);
+    public Optional<Account> getAccountById(Long accountId) throws NoSuchMethodException {
+            return this.accountCrudRepository.findByAccountId(accountId);
+
     }
 }

@@ -1,18 +1,23 @@
 package com.rmm.services.services.serviceImpl;
 
-import com.rmm.services.entity.Account;
-import com.rmm.services.entity.AccountsService;
-import com.rmm.services.entity.AccountsServicePK;
-import com.rmm.services.entity.ServiceEntity;
+import com.rmm.services.entity.*;
+import com.rmm.services.enumeration.TypeDevice;
 import com.rmm.services.repository.AccountRepository;
 import com.rmm.services.repository.AccountsServiceRepository;
+import com.rmm.services.repository.DeviceRepository;
 import com.rmm.services.repository.ServiceRepository;
+import com.rmm.services.services.dto.BillDto;
 import com.rmm.services.services.service.AccountServices;
+import com.rmm.services.util.ValidationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountServiceImpl implements AccountServices {
@@ -26,37 +31,195 @@ public class AccountServiceImpl implements AccountServices {
     @Autowired
     AccountsServiceRepository accountsServiceRepository;
 
+    @Autowired
+    DeviceRepository deviceRepository;
+
     @Override
-    public Account getAccount(Long accountId) {
+    public Account getAccount(Long accountId) throws NoSuchMethodException {
         return accountRepository.getAccountById(accountId).get();
     }
 
     @Override
-    public Account addService(AccountsServicePK accountsServicePK) {
-        try {
-            Account account = accountRepository.getAccountById(accountsServicePK.getAccountId()).get();
-            if (account == null) {
-                return null;
-            }
+    public ResponseEntity<String> addService(AccountsServicePK accountsServicePK) throws NoSuchMethodException {
 
-            ServiceEntity service = serviceRepository.getServiceById(accountsServicePK.getServiceId());
-            if (service == null) {
-                return null;
-            }
+        Optional<Account> account = accountRepository.getAccountById(accountsServicePK.getAccountId());;
+        Optional<ServiceEntity> service = serviceRepository.getServiceById(accountsServicePK.getServiceId());;
 
-            //account.getService().stream().map(accountsService -> )
+        ValidationResponse response = validate(account ,service,true);
 
-            AccountsService services = new AccountsService();
-            services.setAccountServiceId(accountsServicePK);
-            accountsServiceRepository.createAccountsService(services);
-            return account;
-        } catch (Exception e) {
-            return null;
+        if(!response.isSuccessful())
+        {
+            return new ResponseEntity<>(response.getInformation(), response.getHttpStatus());
         }
+        List<AccountsService> list = account.get().getServices();
+
+        AccountsService services = new AccountsService();
+        services.setAccountServiceId(accountsServicePK);
+        services.setAccount(account.get());
+        services.setServices(service.get());
+
+        list.add(services);
+        account.get().setService(list);
+        accountRepository.updateAccount(account.get());
+        return new ResponseEntity<>("Service add successful", HttpStatus.OK);
     }
 
     @Override
-    public Account deleteService(AccountsServicePK accountsServicePK) {
-        return null;
+    public ResponseEntity<String> deleteService(AccountsServicePK accountsServicePK) throws NoSuchMethodException {
+    try {
+        Optional<Account> account = accountRepository.getAccountById(accountsServicePK.getAccountId());;
+        Optional<ServiceEntity> service = serviceRepository.getServiceById(accountsServicePK.getServiceId());;
+
+        ValidationResponse response = validate(account ,service,false);
+
+        if(!response.isSuccessful())
+        {
+            return new ResponseEntity<>(response.getInformation(), response.getHttpStatus());
+        }
+
+        if(accountsServiceRepository.deleteAccountsService(accountsServicePK)) {
+            return new ResponseEntity<>("Service delete successful", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Service Not delete.", HttpStatus.UNAUTHORIZED);
+    }
+    catch(Exception e){
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    }
+
+    @Override
+    public ResponseEntity<String> addDevice(Long accountId, Device device) throws NoSuchMethodException {
+        Optional<Account> account = accountRepository.getAccountById(accountId);
+
+        if(!account.isPresent())
+        {
+            return new ResponseEntity<>("Account doesn't exist.",HttpStatus.NOT_FOUND);
+        }
+
+        device.setAccount(account.get());
+        account.get().getListDevices().add(device);
+        accountRepository.updateAccount(account.get());
+        return new ResponseEntity<>("Device add successful", HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<String> updateDevice(Long accountId, Device device) throws NoSuchMethodException {
+        Optional<Account> account = accountRepository.getAccountById(accountId);
+        if(!account.isPresent())
+        {
+            return new ResponseEntity<>("Account doesn't exist.",HttpStatus.NOT_FOUND);
+        }
+
+        Optional<Device> deviceOptional = deviceRepository.getDeviceById(device.getDeviceId());
+        if(!deviceOptional.isPresent())
+        {
+            return new ResponseEntity<>("Device doesn't exist.",HttpStatus.NOT_FOUND);
+        }
+
+        device.setAccount(account.get());
+        deviceRepository.updateDevice(device);
+        return new ResponseEntity<>("Device update successful", HttpStatus.OK);
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<String> deleteDevice(Long accountId, Long deviceId) throws NoSuchMethodException {
+        try{
+        Optional<Account> account = accountRepository.getAccountById(accountId);
+        if(!account.isPresent())
+        {
+            return new ResponseEntity<>("Account doesn't exist.",HttpStatus.NOT_FOUND);
+        }
+
+        Optional<Device> device = deviceRepository.getDeviceById(deviceId);
+        if(!device.isPresent())
+        {
+            return new ResponseEntity<>("Device doesn't exist.",HttpStatus.NOT_FOUND);
+        }
+
+        account.get().getListDevices().remove(device.get());
+        device.get().setAccount(null);
+        accountRepository.updateAccount(account.get());
+        if(deviceRepository.deleteDevice(deviceId)) {
+            return new ResponseEntity<>("Device delete successful", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Device Not delete.", HttpStatus.UNAUTHORIZED);
+    }
+    catch(Exception e){
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    }
+
+    @Override
+    public ResponseEntity<String> calculateBill(Long accountId) throws NoSuchMethodException {
+
+        BillDto bill= new BillDto();
+
+        Optional<Account> account = accountRepository.getAccountById(accountId);
+
+        List<Device> devices = account.get().getListDevices();
+        List<AccountsService> services = account.get().getServices();
+
+        List<AccountsService> servicesWithOutType = services.stream().filter(
+                acs -> !acs.getService().getApplyType()).collect(Collectors.toList());
+
+        bill.setCostDevice(Double.valueOf( devices.size() * 4 ));
+
+        for(AccountsService service : servicesWithOutType)
+        {
+            bill.setCostServiceWithOutType(bill.getCostServiceWithOutType() +
+                    Double.valueOf(service.getService().getPrices().get(0).getPrice() * devices.size()));
+        }
+
+        List<AccountsService> servicesWithType = services.stream().filter(
+                acs -> acs.getService().getApplyType()).collect(Collectors.toList());
+
+        List<Device> deviceMac = devices.stream().filter(device -> device.getType() == TypeDevice.Mac)
+                .collect(Collectors.toList());
+
+        List<Device> deviceWindows = devices.stream().filter(
+                device -> (device.getType() == TypeDevice.WindowsServer ||
+                        device.getType() == TypeDevice.WindowsWorkstation))
+                .collect(Collectors.toList());
+
+        for(AccountsService service : servicesWithType)
+        {
+            Double.valueOf(deviceWindows.size() * service.getService().getPrices().stream().
+                    filter(price -> (price.getType() == TypeDevice.WindowsWorkstation || price.getType() == TypeDevice.WindowsServer)).
+                    collect(Collectors.toList()).get(0).getPrice());
+
+            Double.valueOf(deviceMac.size() * service.getService().getPrices().stream().
+                    filter(price -> (price.getType() == TypeDevice.Mac)).
+                    collect(Collectors.toList()).get(0).getPrice());
+        }
+
+        bill.setTotal(bill.getCostDevice() + bill.getCostDeviceMac()
+                + bill.getCostServiceWithOutType() + bill.getCostDeviceWindows());
+
+        return new ResponseEntity<>("Bill complete.", HttpStatus.UNAUTHORIZED);
+    }
+
+    public ValidationResponse validate(Optional<Account> account, Optional<ServiceEntity> service, Boolean validate ) throws NoSuchMethodException{
+        if (!account.isPresent()) {
+            return new ValidationResponse(false,"Account doesn't exist.", HttpStatus.NOT_FOUND);
+        }
+
+        if (!service.isPresent()) {
+            return new ValidationResponse(false,"Service doesn't exist.", HttpStatus.NOT_FOUND);
+        }
+
+        /*It only when is necessary
+        * */
+        if(validate)
+        {
+            for (AccountsService aService : account.get().getServices())
+            {
+                if((aService.getService().getServiceId().compareTo(service.get().getServiceId()) == 0))
+                {
+                    return new ValidationResponse(false,"Service assigned to Account.", HttpStatus.UNAUTHORIZED);
+                }
+            }
+        }
+        return new ValidationResponse(true);
     }
 }

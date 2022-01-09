@@ -5,6 +5,8 @@ import com.rmm.services.repository.crudRepository.ServiceCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public class ServiceRepository {
     @Autowired
@@ -20,9 +22,9 @@ public class ServiceRepository {
         return serviceCrudRepository.save(service);
     }
 
-    public ServiceEntity getServiceById(Long serviceId)
+    public Optional<ServiceEntity> getServiceById(Long serviceId)
     {
-        return serviceCrudRepository.findById(serviceId).get();
+        return serviceCrudRepository.findByServiceId(serviceId);
     }
 
 }

@@ -26,9 +26,9 @@ public class CustomerRepository {
         return customerCrudRepository.save(customer);
     }
 
-    public Customer getCustomerById(Long customerId)
+    public Optional<Customer> getCustomerById(Long customerId)
     {
-        return this.customerCrudRepository.findById(customerId).get();
+        return this.customerCrudRepository.findByCustomerId(customerId);
     }
 
     public List<Customer> getAllCustomers()

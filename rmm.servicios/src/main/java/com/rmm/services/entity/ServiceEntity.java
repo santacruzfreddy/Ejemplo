@@ -1,12 +1,8 @@
 package com.rmm.services.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "services")
@@ -20,10 +16,16 @@ public class ServiceEntity {
     @Column(name = "service_Name")
     String serviceName;
 
+    @Column(name = "apply_type")
+    Boolean applyType;
+
     /**
      * This field is used for logic delete
      */
     Boolean state;
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    List<ListPrice> prices;
 
     /*
         auditory fields
@@ -94,5 +96,21 @@ public class ServiceEntity {
 
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
+    }
+
+    public List<ListPrice> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(List<ListPrice> prices) {
+        this.prices = prices;
+    }
+
+    public Boolean getApplyType() {
+        return applyType;
+    }
+
+    public void setApplyType(Boolean applyType) {
+        this.applyType = applyType;
     }
 }

@@ -3,6 +3,7 @@ package com.rmm.services.services.service;
 import com.rmm.services.entity.ServiceEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ServiceServices {
 
@@ -10,7 +11,7 @@ public interface ServiceServices {
 
     public ServiceEntity updateService(ServiceEntity service);
 
-    public ServiceEntity getService(Long serviceId);
+    public Optional<ServiceEntity> getService(Long serviceId);
 
     public List<ServiceEntity> getAllService();
 }

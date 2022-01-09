@@ -5,6 +5,8 @@ import com.rmm.services.services.service.ServiceServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/service")
 public class ServiceController
@@ -25,7 +27,7 @@ public class ServiceController
     }
 
     @GetMapping("/get/{serviceId}")
-    public ServiceEntity getService(@PathVariable("serviceId") Long serviceId)
+    public Optional<ServiceEntity> getService(@PathVariable("serviceId") Long serviceId)
     {
         return serviceServices.getService(serviceId);
     }

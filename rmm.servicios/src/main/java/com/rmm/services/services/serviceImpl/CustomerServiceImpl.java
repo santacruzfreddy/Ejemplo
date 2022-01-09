@@ -7,8 +7,10 @@ import com.rmm.services.services.service.CustomerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerServices {
@@ -33,7 +35,7 @@ public class CustomerServiceImpl implements CustomerServices {
     }
 
     @Override
-    public Customer getCustomer(Long customerId) {
+    public Optional<Customer> getCustomer(Long customerId) {
         return customerRepository.getCustomerById(customerId);
     }
 

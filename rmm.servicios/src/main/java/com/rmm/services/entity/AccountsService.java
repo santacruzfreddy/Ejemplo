@@ -1,5 +1,7 @@
 package com.rmm.services.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,7 +12,9 @@ public class AccountsService {
     AccountsServicePK accountServiceId;
 
     @ManyToOne
+    @MapsId("accountId")
     @JoinColumn(name = "account_id", insertable = false, updatable = false)
+    @JsonIgnore
     private Account account;
 
     @ManyToOne
@@ -37,7 +41,7 @@ public class AccountsService {
         return service;
     }
 
-    public void setService(ServiceEntity service) {
+    public void setServices(ServiceEntity service) {
         this.service = service;
     }
 }

@@ -1,5 +1,7 @@
 package com.rmm.services.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.rmm.services.enumeration.TypeDevice;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,9 +21,13 @@ public class Device {
     @Column(name = "device_name")
     String deviceName;
 
-    @ManyToOne
-    @JoinColumn(name = "account_id",insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
+    @JsonIgnore
     private Account account;
+
+    @Enumerated(EnumType.STRING)
+    private TypeDevice type;
 
     /**
      * This field is used for logic delete
@@ -83,5 +89,13 @@ public class Device {
 
     public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public TypeDevice getType() {
+        return type;
+    }
+
+    public void setType(TypeDevice type) {
+        this.type = type;
     }
 }

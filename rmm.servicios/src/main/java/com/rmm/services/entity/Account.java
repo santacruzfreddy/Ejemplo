@@ -20,11 +20,11 @@ public class Account {
     @OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
     Customer customer;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(cascade = {CascadeType.ALL})
     List<Device> listDevices;
 
-    @OneToMany(mappedBy = "service")
-    List<AccountsService> service;
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.ALL})
+    List<AccountsService> services;
 
     /**
      * This field is used for logic delete
@@ -72,12 +72,12 @@ public class Account {
         this.listDevices = listDevices;
     }
 
-    public List<AccountsService> getService() {
-        return service;
+    public List<AccountsService> getServices() {
+        return services;
     }
 
-    public void setService(List<AccountsService> service) {
-        this.service = service;
+    public void setService(List<AccountsService> services) {
+        this.services = services;
     }
 
     public Boolean getState() {

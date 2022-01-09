@@ -1,11 +1,12 @@
 package com.rmm.services.repository.crudRepository;
 
+import com.rmm.services.entity.ListPrice;
 import com.rmm.services.entity.ServiceEntity;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface ServiceCrudRepository extends CrudRepository<ServiceEntity, Long> {
+public interface ListPriceCrudRepository extends CrudRepository<ListPrice, Long> {
 
-    Optional<ServiceEntity> findByServiceId(Long serviceId);
+    Optional<ListPrice> findByListPriceId(Long ListPriceId);
 }

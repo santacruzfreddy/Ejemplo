@@ -17,4 +17,6 @@ Spring Security
 
 Postgresql  
 
+![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/diagramRmm.png)
+
 https://raw.githubusercontent.com/santacruzfreddy/rmm-services-server-app/master/images/diagramRmm.png

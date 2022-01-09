@@ -9,7 +9,11 @@ In this project we need create a Spring Boot Project, with microservices archite
 
 # Used technology
 
-* Spring FrameWork * Spring Boot * Spring Data JPA * Spring Web * Spring Security
+* Spring FrameWork 
+* Spring Boot
+* Spring Data JPA
+* Spring Web 
+* Spring Security
 
 Postgresql  
 

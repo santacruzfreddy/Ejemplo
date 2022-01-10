@@ -1,0 +1,29 @@
+{
+    "deviceName":"PC 1",
+    "state":true,
+    "type":"WindowsWorkstation"
+}
+
+{
+    "deviceName":"PC 2",
+    "state":true,
+    "type":"WindowsServer"
+}
+
+{
+    "deviceName":"Mac 1",
+    "state":true,
+    "type":"Mac"
+}
+
+{
+    "deviceName":"Mac 2",
+    "state":true,
+    "type":"Mac"
+}
+
+{
+    "deviceName":"Mac",
+    "state":true,
+    "type":"Mac"
+}

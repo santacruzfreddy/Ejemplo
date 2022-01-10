@@ -1,5 +1,7 @@
 package com.rmm.services.services.serviceImpl;
 
+import com.rmm.services.entity.Device;
+import com.rmm.services.entity.ListPrice;
 import com.rmm.services.repository.ServiceRepository;
 import com.rmm.services.services.service.ServiceServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,10 @@ public class ServiceServiceImpl implements ServiceServices {
 
     @Override
     public ServiceEntity createService(ServiceEntity service) {
+        for (ListPrice price: service.getPrices())
+        {
+            price.setService(service);
+        }
         return serviceRepository.createService(service);
     }
 

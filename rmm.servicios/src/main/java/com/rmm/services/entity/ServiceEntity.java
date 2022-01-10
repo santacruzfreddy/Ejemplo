@@ -26,7 +26,7 @@ public class ServiceEntity {
      */
     Boolean state;
 
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "service", cascade = {CascadeType.ALL})
     List<ListPrice> prices;
 
     /*

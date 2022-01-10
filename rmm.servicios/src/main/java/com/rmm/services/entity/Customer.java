@@ -27,12 +27,6 @@ public class Customer {
     @Column(name = "customer_name")
     String customerName;
 
-    @Column(name = "user_name")
-    String userName;
-
-    @Column(name = "user_password")
-    String userPassword;
-
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     @JsonIgnore
@@ -61,22 +55,6 @@ public class Customer {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
     }
 
     public Account getAccount() {

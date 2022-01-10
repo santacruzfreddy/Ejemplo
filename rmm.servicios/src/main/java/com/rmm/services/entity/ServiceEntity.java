@@ -1,5 +1,7 @@
 package com.rmm.services.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -41,6 +43,17 @@ public class ServiceEntity {
 
     @Column(name = "update_user")
     String updateUser;
+
+    public ServiceEntity() {
+    }
+
+    public ServiceEntity(Long serviceId, String serviceName, Boolean applyType, Boolean state, List<ListPrice> prices) {
+        this.serviceId = serviceId;
+        this.serviceName = serviceName;
+        this.applyType = applyType;
+        this.state = state;
+        this.prices = prices;
+    }
 
     public Long getServiceId() {
         return serviceId;

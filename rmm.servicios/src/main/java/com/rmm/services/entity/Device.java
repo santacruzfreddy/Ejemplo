@@ -43,6 +43,17 @@ public class Device {
     @Column(name = "update_date")
     LocalDateTime updateDate;
 
+    public Device() {
+    }
+
+    public Device(Long deviceId, String deviceName, Account account, TypeDevice type, Boolean state) {
+        this.deviceId = deviceId;
+        this.deviceName = deviceName;
+        this.account = account;
+        this.type = type;
+        this.state = state;
+    }
+
     public Long getDeviceId() {
         return deviceId;
     }

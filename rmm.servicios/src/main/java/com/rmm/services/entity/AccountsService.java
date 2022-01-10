@@ -21,6 +21,15 @@ public class AccountsService {
     @JoinColumn(name = "service_id", insertable = false, updatable = false)
     ServiceEntity service;
 
+    public AccountsService() {
+    }
+
+    public AccountsService(AccountsServicePK accountServiceId, Account account, ServiceEntity service) {
+        this.accountServiceId = accountServiceId;
+        this.account = account;
+        this.service = service;
+    }
+
     public AccountsServicePK getAccountServiceId() {
         return accountServiceId;
     }

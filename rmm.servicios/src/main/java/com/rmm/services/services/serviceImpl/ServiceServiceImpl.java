@@ -27,7 +27,8 @@ public class ServiceServiceImpl implements ServiceServices {
 
     @Override
     public Optional<ServiceEntity> getService(Long serviceId) {
-        return serviceRepository.getServiceById(serviceId);
+        Optional<ServiceEntity> a=serviceRepository.getServiceById(serviceId);
+        return a;
     }
 
     @Override

@@ -41,7 +41,8 @@ public class AccountServiceImpl implements AccountServices {
 
     @Override
     public Account getAccount(Long accountId) throws NoSuchMethodException {
-        return accountRepository.getAccountById(accountId).get();
+        Account a=accountRepository.getAccountById(accountId).get();
+        return a;
     }
 
     @Override
@@ -184,55 +185,104 @@ public class AccountServiceImpl implements AccountServices {
         }
         return new ValidationResponse(true);
     }
-    
+
     @Override
     public ResponseEntity<String> calculateBill(Long accountId) throws NoSuchMethodException {
 
         BillDto bill= new BillDto();
 
+
         Optional<Account> account = accountRepository.getAccountById(accountId);
+        if(!account.isPresent())
+        {
+            return new ResponseEntity<>("Account doesn't exist.",HttpStatus.NOT_FOUND);
+        }
 
         List<Device> devices = account.get().getListDevices();
+        if(devices.isEmpty())
+        {
+            return new ResponseEntity<>("Account doesn't have assigned devices.", HttpStatus.NOT_FOUND);
+        }
+
         List<AccountsService> services = account.get().getServices();
 
+        if(services.isEmpty())
+        {
+            return new ResponseEntity<>("Account doesn't have assigned service.", HttpStatus.NOT_FOUND);
+        }
+
+        bill.setCostDevice(calculateCostByDevices(devices.size()));
+
+        bill.setCostServiceWithOutType(calculateCostServiceWithOutType(services, devices));
+
+        bill.setCostDeviceMac(calculateCostServiceWithTypeDeviceMac(services,devices));
+
+        bill.setCostDeviceWindows(calculateCostServiceWithTypeDeviceWindows(services, devices));
+
+        bill.setTotal(bill.getCostDevice() + bill.getCostDeviceMac()
+                + bill.getCostServiceWithOutType() + bill.getCostDeviceWindows());
+
+        return new ResponseEntity<>("Bill complete = " + bill.getTotal(), HttpStatus.OK);
+    }
+
+    public Double calculateCostByDevices(int numberDevices){
+
+        return Double.valueOf(numberDevices * 4);
+    }
+
+    public Double calculateCostServiceWithOutType(List<AccountsService> services,List<Device> devices)
+    {
+        Double cost = 0.0;
         List<AccountsService> servicesWithOutType = services.stream().filter(
                 acs -> !acs.getService().getApplyType()).collect(Collectors.toList());
 
-        bill.setCostDevice(Double.valueOf( devices.size() * 4 ));
-
         for(AccountsService service : servicesWithOutType)
         {
-            bill.setCostServiceWithOutType(bill.getCostServiceWithOutType() +
-                    Double.valueOf(service.getService().getPrices().get(0).getPrice() * devices.size()));
+            cost += Double.valueOf(service.getService().getPrices().get(0).getPrice() * devices.size());
         }
+        return cost;
+    }
 
+    public Double calculateCostServiceWithTypeDeviceWindows(List<AccountsService> services,List<Device> devices)
+    {
+        try {
+            Double cost = 0.0;
+            List<AccountsService> servicesWithType = services.stream().filter(
+                    acs -> acs.getService().getApplyType()).collect(Collectors.toList());
+
+            List<Device> deviceWindows = devices.stream().filter(
+                            device -> (device.getType() == TypeDevice.WindowsServer ||
+                                    device.getType() == TypeDevice.WindowsWorkstation))
+                    .collect(Collectors.toList());
+
+            for (AccountsService service : servicesWithType) {
+                cost += Double.valueOf(deviceWindows.size() * service.getService().getPrices().stream().
+                        filter(price -> (price.getType() == TypeDevice.WindowsWorkstation || price.getType() == TypeDevice.WindowsServer)).
+                        collect(Collectors.toList()).get(0).getPrice());
+            }
+            return cost;
+        }     catch (Exception e)
+        {
+
+            return 0.0;
+        }
+    }
+
+    public Double calculateCostServiceWithTypeDeviceMac(List<AccountsService> services,List<Device> devices)
+    {
+        Double cost = 0.0;
         List<AccountsService> servicesWithType = services.stream().filter(
                 acs -> acs.getService().getApplyType()).collect(Collectors.toList());
 
         List<Device> deviceMac = devices.stream().filter(device -> device.getType() == TypeDevice.Mac)
                 .collect(Collectors.toList());
 
-        List<Device> deviceWindows = devices.stream().filter(
-                device -> (device.getType() == TypeDevice.WindowsServer ||
-                        device.getType() == TypeDevice.WindowsWorkstation))
-                .collect(Collectors.toList());
-
         for(AccountsService service : servicesWithType)
         {
-            Double.valueOf(deviceWindows.size() * service.getService().getPrices().stream().
-                    filter(price -> (price.getType() == TypeDevice.WindowsWorkstation || price.getType() == TypeDevice.WindowsServer)).
-                    collect(Collectors.toList()).get(0).getPrice());
-
-            Double.valueOf(deviceMac.size() * service.getService().getPrices().stream().
+            cost += Double.valueOf(deviceMac.size() * service.getService().getPrices().stream().
                     filter(price -> (price.getType() == TypeDevice.Mac)).
                     collect(Collectors.toList()).get(0).getPrice());
         }
-
-        bill.setTotal(bill.getCostDevice() + bill.getCostDeviceMac()
-                + bill.getCostServiceWithOutType() + bill.getCostDeviceWindows());
-
-        return new ResponseEntity<>("Bill complete.", HttpStatus.UNAUTHORIZED);
+        return cost;
     }
-
-
 }

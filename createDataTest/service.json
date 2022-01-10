@@ -1,0 +1,62 @@
+//create service
+{
+    "serviceName":"Antivirus",
+    "state":true,
+    "applyType":true,
+    "creationUser":"UserDefault",
+    "prices":[
+        {
+            "applyType":true,
+            "price":7,
+            "type":"Mac"
+        },{
+            "applyType":true,
+            "price":5,
+            "type":"WindowsWorkstation"
+        },
+        {
+            "applyType":true,
+            "price":5,
+            "type":"WindowsServer"
+        }
+    ]
+}
+
+{
+    "serviceName":"CloudBerry",
+    "state":true,
+    "applyType":false,
+    "creationUser":"UserDefault",
+    "prices":[
+        {
+            "applyType":false,
+            "price":3            
+        }
+    ]
+}
+
+{
+    "serviceName":"PSA",
+    "state":true,
+    "applyType":false,
+    "creationUser":"UserDefault",
+    "prices":[
+        {
+            "applyType":false,
+            "price":2
+        }
+    ]
+}
+
+{
+    "serviceName":"TeamViewer",
+    "state":true,
+    "applyType":false,
+    "creationUser":"UserDefault",
+    "prices":[
+        {
+            "applyType":false,
+            "price":1
+        }
+    ]
+}

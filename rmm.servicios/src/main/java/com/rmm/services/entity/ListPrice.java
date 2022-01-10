@@ -24,6 +24,12 @@ public class ListPrice {
     @JsonIgnore
     private ServiceEntity service;
 
+    public ListPrice(Long listPriceId, Double price, TypeDevice type) {
+        this.listPriceId = listPriceId;
+        this.price = price;
+        this.type = type;
+    }
+
     public Long getListPriceId() {
         return listPriceId;
     }

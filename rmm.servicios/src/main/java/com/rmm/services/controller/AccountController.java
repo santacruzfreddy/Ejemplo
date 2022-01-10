@@ -17,7 +17,13 @@ public class AccountController
     AccountServices accountService;
     @GetMapping("/get/{accountId}")
     public Account getAccount(@PathVariable("accountId") Long accountId) throws NoSuchMethodException {
-        return accountService.getAccount(accountId);
+        try {
+            return accountService.getAccount(accountId);
+        }catch (Exception e)
+        {
+
+            return null;
+        }
     }
 
     @PostMapping("/addService")

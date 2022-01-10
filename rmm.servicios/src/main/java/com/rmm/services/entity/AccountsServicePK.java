@@ -13,6 +13,11 @@ public class AccountsServicePK implements Serializable {
     @Column(name = "service_id")
     Long serviceId;
 
+    public AccountsServicePK(Long accountId, Long serviceId) {
+        this.accountId = accountId;
+        this.serviceId = serviceId;
+    }
+
     public Long getAccountId() {
         return accountId;
     }

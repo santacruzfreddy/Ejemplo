@@ -9,12 +9,9 @@ import java.util.Optional;
 
 @Repository
 public class AccountRepository {
+
     @Autowired
     private AccountCrudRepository accountCrudRepository;
-
-    private static void run() {
-
-    }
 
     public Account createAccount(Account account)
     {
@@ -28,6 +25,5 @@ public class AccountRepository {
 
     public Optional<Account> getAccountById(Long accountId) throws NoSuchMethodException {
             return this.accountCrudRepository.findByAccountId(accountId);
-
     }
 }

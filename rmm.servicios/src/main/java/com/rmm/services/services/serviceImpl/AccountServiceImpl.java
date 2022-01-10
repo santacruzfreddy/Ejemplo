@@ -34,6 +34,11 @@ public class AccountServiceImpl implements AccountServices {
     @Autowired
     DeviceRepository deviceRepository;
 
+    public AccountServiceImpl(AccountRepository accountRepository, ServiceRepository serviceRepository) {
+        this.accountRepository = accountRepository;
+        this.serviceRepository = serviceRepository;
+    }
+
     @Override
     public Account getAccount(Long accountId) throws NoSuchMethodException {
         return accountRepository.getAccountById(accountId).get();
@@ -41,7 +46,7 @@ public class AccountServiceImpl implements AccountServices {
 
     @Override
     public ResponseEntity<String> addService(AccountsServicePK accountsServicePK) throws NoSuchMethodException {
-
+    try{
         Optional<Account> account = accountRepository.getAccountById(accountsServicePK.getAccountId());;
         Optional<ServiceEntity> service = serviceRepository.getServiceById(accountsServicePK.getServiceId());;
 
@@ -62,6 +67,11 @@ public class AccountServiceImpl implements AccountServices {
         account.get().setService(list);
         accountRepository.updateAccount(account.get());
         return new ResponseEntity<>("Service add successful", HttpStatus.OK);
+
+    }
+    catch(Exception e){
+        return new ResponseEntity<>("Error can't add service.", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
     }
 
     @Override
@@ -77,13 +87,14 @@ public class AccountServiceImpl implements AccountServices {
             return new ResponseEntity<>(response.getInformation(), response.getHttpStatus());
         }
 
-        if(accountsServiceRepository.deleteAccountsService(accountsServicePK)) {
+        Boolean result = accountsServiceRepository.deleteAccountsService(accountsServicePK);
+        if(result) {
             return new ResponseEntity<>("Service delete successful", HttpStatus.OK);
         }
-        return new ResponseEntity<>("Service Not delete.", HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>("Service can't delete.", HttpStatus.UNAUTHORIZED);
     }
     catch(Exception e){
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>("Exception null Point ", HttpStatus.INTERNAL_SERVER_ERROR);
     }
     }
 
@@ -150,6 +161,30 @@ public class AccountServiceImpl implements AccountServices {
     }
     }
 
+    public ValidationResponse validate(Optional<Account> account, Optional<ServiceEntity> service, Boolean validate ) throws NoSuchMethodException{
+        if (!account.isPresent()) {
+            return new ValidationResponse(false,"Account doesn't exist.", HttpStatus.NOT_FOUND);
+        }
+
+        if (!service.isPresent()) {
+            return new ValidationResponse(false,"Service doesn't exist.", HttpStatus.NOT_FOUND);
+        }
+
+        /*It only when is necessary
+         * */
+        if(validate)
+        {
+            for (AccountsService aService : account.get().getServices())
+            {
+                if((aService.getService().getServiceId().compareTo(service.get().getServiceId()) == 0))
+                {
+                    return new ValidationResponse(false,"Service assigned to Account.", HttpStatus.UNAUTHORIZED);
+                }
+            }
+        }
+        return new ValidationResponse(true);
+    }
+    
     @Override
     public ResponseEntity<String> calculateBill(Long accountId) throws NoSuchMethodException {
 
@@ -199,27 +234,5 @@ public class AccountServiceImpl implements AccountServices {
         return new ResponseEntity<>("Bill complete.", HttpStatus.UNAUTHORIZED);
     }
 
-    public ValidationResponse validate(Optional<Account> account, Optional<ServiceEntity> service, Boolean validate ) throws NoSuchMethodException{
-        if (!account.isPresent()) {
-            return new ValidationResponse(false,"Account doesn't exist.", HttpStatus.NOT_FOUND);
-        }
 
-        if (!service.isPresent()) {
-            return new ValidationResponse(false,"Service doesn't exist.", HttpStatus.NOT_FOUND);
-        }
-
-        /*It only when is necessary
-        * */
-        if(validate)
-        {
-            for (AccountsService aService : account.get().getServices())
-            {
-                if((aService.getService().getServiceId().compareTo(service.get().getServiceId()) == 0))
-                {
-                    return new ValidationResponse(false,"Service assigned to Account.", HttpStatus.UNAUTHORIZED);
-                }
-            }
-        }
-        return new ValidationResponse(true);
-    }
 }

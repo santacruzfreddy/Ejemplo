@@ -14,11 +14,24 @@ In this project we need create a Spring Boot Project, with microservices archite
 * Spring Data JPA
 * Spring Web 
 * Spring Security
+* JSON Web Token Support For The JVM
 * Postgresql  
+* PostMan
 
 After to read the challenge, I created my ER Diagram as a solution, show below next picture
 
 ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/diagramRmm.png)
+
+# Setup and run Project
+next explanation is how setup and run this project
+* git clone this repository
+* Open project with Intellig IDEA, eclipse, netbeans or visual studio code.
+* For run this project should have install and setup Java 11 in your machine.
+* For run this project should have install postgres, also create a database with name -> "test" and password -> "password".
+* last run application, when this run to create all tables.
+
+
+
 
 # UpLoad data test
 

@@ -20,10 +20,10 @@ SET row_security = off;
 -- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
-CREATE SCHEMA public;
+CREATE SCHEMA if not exists public;
 
 
-ALTER SCHEMA public OWNER TO postgres;
+ALTER SCHEMA public OWNER TO test;
 
 --
 -- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres

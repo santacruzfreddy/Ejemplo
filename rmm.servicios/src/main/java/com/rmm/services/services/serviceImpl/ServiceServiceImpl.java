@@ -5,9 +5,12 @@ import com.rmm.services.entity.ListPrice;
 import com.rmm.services.repository.ServiceRepository;
 import com.rmm.services.services.service.ServiceServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.rmm.services.entity.ServiceEntity;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +42,21 @@ public class ServiceServiceImpl implements ServiceServices {
 
     @Override
     public List<ServiceEntity> getAllService() {
-        return null;
+        return serviceRepository.getAllServices();
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<String> createMultipleServices(List<ServiceEntity> services) {
+        try {
+            for (ServiceEntity service:services)
+            {
+                createService(service);
+            }
+            return new ResponseEntity<>("Create all Services", HttpStatus.OK);
+        }catch (Exception e)
+        {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

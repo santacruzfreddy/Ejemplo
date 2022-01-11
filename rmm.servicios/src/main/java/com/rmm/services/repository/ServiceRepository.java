@@ -5,6 +5,7 @@ import com.rmm.services.repository.crudRepository.ServiceCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -25,6 +26,11 @@ public class ServiceRepository {
     public Optional<ServiceEntity> getServiceById(Long serviceId)
     {
         return serviceCrudRepository.findByServiceId(serviceId);
+    }
+
+    public List<ServiceEntity> getAllServices()
+    {
+        return (List<ServiceEntity>) serviceCrudRepository.findAll();
     }
 
 }

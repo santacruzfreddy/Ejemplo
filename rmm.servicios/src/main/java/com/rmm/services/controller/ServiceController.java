@@ -3,8 +3,10 @@ package com.rmm.services.controller;
 import com.rmm.services.entity.ServiceEntity;
 import com.rmm.services.services.service.ServiceServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -32,4 +34,15 @@ public class ServiceController
         return serviceServices.getService(serviceId);
     }
 
+    @GetMapping("/getAll")
+    public List<ServiceEntity> getAll()
+    {
+        return serviceServices.getAllService();
+    }
+
+    @PostMapping("/createMultiple")
+    public ResponseEntity<String> createMultipleService(@RequestBody List<ServiceEntity> services)
+    {
+        return serviceServices.createMultipleServices(services);
+    }
 }

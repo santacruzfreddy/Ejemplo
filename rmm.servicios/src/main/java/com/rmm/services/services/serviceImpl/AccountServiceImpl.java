@@ -41,8 +41,7 @@ public class AccountServiceImpl implements AccountServices {
 
     @Override
     public Account getAccount(Long accountId) throws NoSuchMethodException {
-        Account a=accountRepository.getAccountById(accountId).get();
-        return a;
+        return accountRepository.getAccountById(accountId).get();
     }
 
     @Override

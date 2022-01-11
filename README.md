@@ -40,22 +40,23 @@ Decompress workSpacePostMan.zip, before From PostMan UI import to folder as show
 
 * Pulse "Import" button
 
-![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/diagramRmm.png)
+![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/pulseImport.png)
 
 * Pulse "Folder" Tab
 
-![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/diagramRmm.png)
+![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/pulseTabFolder.png)
 
 Pulse "Choose folder from your computer" button
 
-![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/diagramRmm.png)
+![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/pulseChoose.png)
 
 After you choose decompress folder.
 
+Once the workspace is loaded, you can setter test data
 
 # UpLoad data test
 
-Explanation like you can load data to run the project
+Explanation like you can load data to run the project.
 
 
 # Exposed Rest API 

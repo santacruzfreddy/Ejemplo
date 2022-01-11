@@ -7,8 +7,11 @@ import com.rmm.services.entity.ServiceEntity;
 import com.rmm.services.services.service.AccountServices;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/account")
@@ -63,4 +66,12 @@ public class AccountController
     public ResponseEntity<String> calculateBill(@PathVariable("accountId") Long accountId) throws NoSuchMethodException {
         return accountService.calculateBill(accountId);
     }
+
+    @GetMapping("/getAll/{state}")
+    public ResponseEntity<List<Account>> getAllAccount(@PathVariable("state") boolean state) throws NoSuchMethodException {
+        return accountService.getAllAccount(state)
+                .map(accounts -> new ResponseEntity<>(accounts, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
 }

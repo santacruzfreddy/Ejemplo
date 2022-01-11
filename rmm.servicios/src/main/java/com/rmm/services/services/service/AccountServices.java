@@ -5,6 +5,7 @@ import com.rmm.services.entity.AccountsServicePK;
 import com.rmm.services.entity.Device;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface AccountServices {
@@ -22,5 +23,7 @@ public interface AccountServices {
     public ResponseEntity<String> deleteDevice(Long accountId, Long deviceId) throws NoSuchMethodException;
 
     public ResponseEntity<String> calculateBill(Long accountId) throws NoSuchMethodException;
+
+    public Optional<List<Account>> getAllAccount(boolean state) throws NoSuchMethodException;
 
 }

@@ -5,6 +5,7 @@ import com.rmm.services.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -25,5 +26,9 @@ public class AccountRepository {
 
     public Optional<Account> getAccountById(Long accountId) throws NoSuchMethodException {
             return this.accountCrudRepository.findByAccountId(accountId);
+    }
+
+    public Optional<List<Account>> getAllAccount(boolean state){
+        return accountCrudRepository.findByState(state);
     }
 }

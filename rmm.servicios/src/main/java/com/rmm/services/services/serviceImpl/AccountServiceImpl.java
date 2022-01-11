@@ -224,6 +224,11 @@ public class AccountServiceImpl implements AccountServices {
         return new ResponseEntity<>("Bill complete = " + bill.getTotal(), HttpStatus.OK);
     }
 
+    @Override
+    public Optional<List<Account>> getAllAccount(boolean state) throws NoSuchMethodException {
+        return accountRepository.getAllAccount(state);
+    }
+
     public Double calculateCostByDevices(int numberDevices){
 
         return Double.valueOf(numberDevices * 4);

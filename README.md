@@ -17,6 +17,7 @@ In this project we need create a Spring Boot Project, with microservices archite
 * JSON Web Token Support For The JVM
 * Postgresql  
 * PostMan
+* JAVA
 
 After to read the challenge, I created my ER Diagram as a solution, show below next picture
 
@@ -26,11 +27,30 @@ After to read the challenge, I created my ER Diagram as a solution, show below n
 next explanation is how setup and run this project
 * git clone this repository
 * Open project with Intellig IDEA, eclipse, netbeans or visual studio code.
-* For run this project should have install and setup Java 11 in your machine.
+* For run this project should have install and setup Java 11 in your machine, and in your IDE that prefer.
 * For run this project should have install postgres, also create a database with name -> "test" and password -> "password".
 * last run application, when this run to create all tables.
 
+# Import WorkSpace POSTMAN
+Inside this project in the folder rmm-services-server-app exists and file .zip with name workSpacePostMan.zip, in this workSpace 
+has all request that need to test project.
 
+* Import WorkSpace inside PostMan
+Decompress workSpacePostMan.zip, before From PostMan UI import to folder as show next images
+
+* Pulse "Import" button
+
+![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/diagramRmm.png)
+
+* Pulse "Folder" Tab
+
+![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/diagramRmm.png)
+
+Pulse "Choose folder from your computer" button
+
+![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/diagramRmm.png)
+
+After you choose decompress folder.
 
 
 # UpLoad data test
@@ -40,7 +60,7 @@ Explanation like you can load data to run the project
 
 # Exposed Rest API 
 
-In this project a have many Rest API, this can be run with PostMan
+In this project a have many Rest API, this can be run with PostMan 
 
 * API REST to create a Service with Http POST
   

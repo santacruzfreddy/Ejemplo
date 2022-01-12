@@ -54,41 +54,43 @@ After you choose decompress folder.
 
 Once the workspace is loaded, you can setter test data
 
-# UpLoad data test
+# Upload data test
 
-Explanation like you can load data to run the project.
+Explanation like you can run project to load test data  to run the project.
+
+Once you import postman workspase
+* Run project 
+* Select in postman environment "local"
+![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/pulseImport.png)
+* Exists a request in the colletion "Authentification" with name "authentification", this request generate a Java web token which allow conect all request 
+![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/pulseImport.png)
+* Configurate variable "Authorization"
+ note: copy jwt generate with Authentification request, after edit local environment in the Authorization in Current value field paste jwt.
+  example -> Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MTk1MTE3MiwiZXhwIjoxNjQyMDA1MTcyfQ.WK_F128BZMxKAlIepMUsTLRi27ULe4h1TjjX5FKSIHQ
+  this value should star with "Bearer ".
+ ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/pulseImport.png)
+ 
+ * You choose from Customer Colletion -> CreateCustomer 
+ note: this request create customer also create a new accout link with it.
+ ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/pulseImport.png)
+ 
+ * You choose from Services Colletion -> CreateMultipleServices
+ note: this request create services test 
+ ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/pulseImport.png)
+ 
+ 
+ # Run
+ 
+ * You choose from Account Colletion -> GetAllAccount
+ note: this request get all accounts with state = true, you copy accountId 
+ ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/pulseImport.png)
+ 
+ 
+ 
+ 
 
 
-# Exposed Rest API 
+ 
 
-In this project a have many Rest API, this can be run with PostMan 
-
-* API REST to create a Service with Http POST
-  
-  http://localhost:8080/service/create
-  
-  in body put next Json
-  {
-    "servicerId":1,
-    "serviceName":"Antivirus",
-    "state":true,
-    "creationUser":"UserDefault",
-    "prices":[
-        {
-            "applyType":true,
-            "price":7,
-            "type":"Mac"
-        },{
-            "applyType":true,
-            "price":5,
-            "type":"WindowsWorkstation"
-        },
-        {
-            "applyType":true,
-            "price":5,
-            "type":"WindowsServer"
-        }
-    ]
-  }
   
   

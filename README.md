@@ -86,7 +86,7 @@ Once you import postman workspase
 
 example -> Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MTk1MTE3MiwiZXhwIjoxNjQyMDA1MTcyfQ.WK_F128BZMxKAlIepMUsTLRi27ULe4h1TjjX5FKSIHQ
   
-  this value should star with "Bearer " must blank space exists with token.  
+  this value should start with "Bearer " must blank space exists with token.  
   
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/configurationEnvironment.png)
  
@@ -100,7 +100,7 @@ note: this request create customer also create a new accout link with it.
  
  note: this request create services test, also link list price to service
  
- ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/pulseImport.png)
+ ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/createMultipleServices.png)
  
  
  # Run project

@@ -7,6 +7,8 @@ This project is a implementation about the Ninja One challenge.
 
 In this project we need create a Spring Boot Project, with microservices architecture 
 
+note: If I have problem to look picture, I created a document with all information inside this repository 
+
 # Used technology
 
 * Spring FrameWork 
@@ -91,17 +93,73 @@ Once you import postman workspase
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/createCustomer.png)
  
  * You choose from Services Colletion -> CreateMultipleServices
- note: this request create services test 
+ note: this request create services test, also link list price to service
  
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/pulseImport.png)
  
  
- # Run
+ # Run project
  
  * You choose from Account Colletion -> GetAllAccount
- note: this request get all accounts with state = true, you copy accountId 
+ note: this request get all accounts with state = true, copy an accountId 
  
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/getAllAccount.png)
+ 
+ * You choose from Account Colletion -> GetAccount
+ note: this request get account by accountId 
+ 
+ ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/getAllAccount.png)
+ 
+ * You choose from Account Colletion -> addService
+ note: this request add service to account
+ 
+ ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/getAllAccount.png)
+ 
+ * You choose from Account Colletion -> deleteService
+ note: this request delete service to account, this request delete link not service
+ 
+ ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/getAllAccount.png)
+ 
+ * You choose from Account Colletion -> addDevice
+ note: this request add device to accout
+ 
+ ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/getAllAccount.png)
+ 
+ * You choose from Account Colletion -> deletDevice
+ note: this request get account by accountId 
+ 
+ ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/getAllAccount.png)
+ 
+ 
+ * You choose from Account Colletion -> calculate Bill
+ note: this request calculate total bill by accountId
+ ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/getAllAccount.png)
+ 
+ # Test JUnit and Mockito
+ 
+ In this project I did some test bellow breakDown
+ 
+ * test calculate bill
+ * test not exist account
+ * test not exist service
+ * test delete_service_error_when_null_parameter
+
+configurate mockito data to testing
+
+# JWT security APi
+
+For security  I used JWT (java web token) to create token with 3 hours expired time.
+
+* User -> admin 
+* password -> rmm
+
+* Thank to read 
+
+* copyrigth Freddy Santacruz
+ 
+ 
+ 
+ 
  
  
  

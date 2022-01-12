@@ -82,7 +82,8 @@ Once you import postman workspase
 
 * Configurate variable "Authorization"
  note: copy jwt generate with Authentification request, after edit local environment in the Authorization in Current value field paste jwt.
-  example -> Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MTk1MTE3MiwiZXhwIjoxNjQyMDA1MTcyfQ.WK_F128BZMxKAlIepMUsTLRi27ULe4h1TjjX5FKSIHQ
+
+example -> Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MTk1MTE3MiwiZXhwIjoxNjQyMDA1MTcyfQ.WK_F128BZMxKAlIepMUsTLRi27ULe4h1TjjX5FKSIHQ
   this value should star with "Bearer ".
   
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/configurationEnvironment.png)
@@ -153,9 +154,11 @@ For security  I used JWT (java web token) to create token with 3 hours expired t
 * User -> admin 
 * password -> rmm
 
-* Thank to read 
 
-* copyrigth Freddy Santacruz
+Thanks for read 
+
+
+Copyrigth Freddy Santacruz
  
  
  

@@ -133,7 +133,7 @@ note: this request delete service to account, you must send a object with accout
 
 note: this request add device to accout, you must send accountId over URL and an Object with device data.
  
- ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/getAllAccount.png)
+ ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/addDevice.png)
  
  * You choose from Account Colletion -> deleteDevice
 
@@ -151,7 +151,7 @@ note: this request delete device, you must send accoutId and deviceId over URL.
  
  note: this request calculate total bill by accountId
  
- ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/getAllAccount.png)
+ ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/calculateBill.png)
  
  # Test JUnit and Mockito
  

@@ -81,19 +81,23 @@ Once you import postman workspase
 ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/requestAuth.png)
 
 * Configurate variable "Authorization"
+
  note: copy jwt generate with Authentification request, after edit local environment in the Authorization in Current value field paste jwt.
 
 example -> Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MTk1MTE3MiwiZXhwIjoxNjQyMDA1MTcyfQ.WK_F128BZMxKAlIepMUsTLRi27ULe4h1TjjX5FKSIHQ
+  
   this value should star with "Bearer " must blank space exists with token.  
   
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/configurationEnvironment.png)
  
  * You choose from Customer Colletion -> CreateCustomer 
- note: this request create customer also create a new accout link with it.
+
+note: this request create customer also create a new accout link with it.
  
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/createCustomer.png)
  
  * You choose from Services Colletion -> CreateMultipleServices
+ 
  note: this request create services test, also link list price to service
  
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/pulseImport.png)
@@ -102,42 +106,51 @@ example -> Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MTk1MTE3M
  # Run project
  
  * You choose from Account Colletion -> GetAllAccount
- note: this request get all accounts with state = true, copy an accountId 
+
+note: this request get all accounts with state = true, copy an accountId 
  
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/getAllAccount.png)
  
  * You choose from Account Colletion -> GetAccount
- note: this request get account by accountId 
+
+note: this request get account by accountId 
  
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/getAccount.png)
  
  * You choose from Account Colletion -> addService
- note: this request add service to account, you must send a object with accoutId and serviceId.
+
+note: this request add service to account, you must send a object with accoutId and serviceId.
  
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/addService.png)
  
  * You choose from Account Colletion -> deleteService
- note: this request delete service to account, you must send a object with accoutId and serviceId. this request delete link not service.
+
+note: this request delete service to account, you must send a object with accoutId and serviceId. this request delete link not service.
  
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/deleteService.png)
  
  * You choose from Account Colletion -> addDevice
- note: this request add device to accout, you must send accountId over URL and an Object with device data.
+
+note: this request add device to accout, you must send accountId over URL and an Object with device data.
  
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/getAllAccount.png)
  
- * You choose from Account Colletion -> deletDevice
- note: this request delete device, you must send accoutId and deviceId over URL.
+ * You choose from Account Colletion -> deleteDevice
+
+note: this request delete device, you must send accoutId and deviceId over URL.
  
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/deleteDevice.png)
  
  * You choose from Account Colletion -> UpdateDevice
+ 
  note: this request update device, you must send deviceId over URL.
  
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/updateDevice.png)
  
  * You choose from Account Colletion -> calculate Bill
+ 
  note: this request calculate total bill by accountId
+ 
  ![Image text](https://github.com/santacruzfreddy/rmm-services-server-app/blob/master/images/getAllAccount.png)
  
  # Test JUnit and Mockito

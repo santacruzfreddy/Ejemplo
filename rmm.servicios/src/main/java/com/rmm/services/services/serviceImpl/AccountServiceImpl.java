@@ -190,7 +190,6 @@ public class AccountServiceImpl implements AccountServices {
 
         BillDto bill= new BillDto();
 
-
         Optional<Account> account = accountRepository.getAccountById(accountId);
         if(!account.isPresent())
         {
